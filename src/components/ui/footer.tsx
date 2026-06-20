@@ -7,8 +7,8 @@ const sections = [
   {
     title: 'Product',
     links: [
-      { label: 'Features', href: '#' },
-      { label: 'How it works', href: '#' },
+      { label: 'Features', href: '/#features' },
+      { label: 'How it works', href: '/#how-it-works' },
       { label: 'Pricing', href: '#' },
       { label: 'Changelog', href: '#' },
     ],
@@ -34,9 +34,9 @@ const sections = [
   {
     title: 'Legal',
     links: [
-      { label: 'Privacy', href: '#' },
-      { label: 'Terms', href: '#' },
-      { label: 'Security', href: '#' },
+      { label: 'Privacy', href: '/privacy-policy' },
+      { label: 'Terms', href: '/terms-and-conditions' },
+      { label: 'Security', href: '/privacy-policy#security' },
     ],
   },
 ]
@@ -57,9 +57,7 @@ export default function Footer() {
             <Image src="/favicon.ico" alt="starfsh logo" width={36} height={36} />
             <div className="flex items-center space-x-px text-lg">
               <span className="font-light text-foreground/80">star</span>
-              <span className="bg-linear-to-r from-primary to-primary-foreground bg-clip-text font-extrabold text-transparent">
-                fsh
-              </span>
+              <span className="bg-linear-to-r from-primary to-primary-foreground bg-clip-text font-extrabold text-transparent">fsh</span>
             </div>
           </Link>
           <p className="max-w-xs text-sm leading-relaxed text-foreground/60">

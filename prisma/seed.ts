@@ -13,7 +13,7 @@ async function main() {
     where: { email: "raedhashmi15@gmail.com" },
     update: {},
     create: {
-      username: "raedh",
+      name: "raedh",
       email: "raedhashmi15@gmail.com",
       password: hashedPassword,
       acceptsMarketing: true,
@@ -28,9 +28,9 @@ async function main() {
       },
       repositories: {
         create: {
-          repositoryName: "Starfsh",
+          repositoryName: "starfsh",
           repositoryLink: "https://github.com/raedhashmi/starfsh",
-          summaryText: "Starfsh is a tool for generating codebase summaries.",
+          summaryText: "starfsh is a tool for generating codebase summaries.",
         },
       },
     },

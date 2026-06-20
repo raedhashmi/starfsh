@@ -5,7 +5,7 @@ import HowItWorks from '@/components/ui/landing/how-it-works'
 import Features from '@/components/ui/landing/features'
 import CTA from '@/components/ui/landing/cta'
 import FAQ from '@/components/ui/landing/faq'
-import Footer from '@/components/ui/landing/footer'
+import Footer from '@/components/ui/footer'
 import { Marquee, MarqueeFade, MarqueeItem, MarqueeContent } from '@/components/ui/landing/marquee'
 
 export default function Home() {

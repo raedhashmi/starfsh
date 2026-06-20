@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export const metadata = {
-  title: "starfsh — AI GitHub Repo Analyzer",
+  title: "starfsh",
   description:
     "Analyze, refactor, and document GitHub repositories using AI. starfsh scans your codebase and helps you regenerate, improve, and understand it instantly.",
   metadataBase: new URL("https://starfsh.lrdevstudio.com"),

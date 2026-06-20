@@ -1,5 +1,5 @@
 'use client'
-import { useRouter } from "next/navigation"
+
 import Link from "next/link"
 import Image from "next/image"
 import { 
@@ -11,12 +11,19 @@ import {
   SheetDescription,
   SheetFooter,
   SheetClose,
-} from "./landing/sheet"
-import { RiMenuLine } from "@remixicon/react"
+} from "./sheet"
 import { Button } from "./button"
+import { auth } from "@/auth"
+import { useRouter } from "next/navigation"
+import { RiMenuLine } from "@remixicon/react"
 
-export default function Navbar() {
+export default async function Navbar() {
+  const session = await auth()
   const router = useRouter()
+
+  if (!session?.user) {
+    router.push("/login")
+  }
 
   return (
     <nav className="flex fixed top-4 inset-x-0 mx-auto p-4 px-8 w-[80%] h-16 z-20 rounded-3xl items-center justify-between border border-primary/20 bg-primary/10 backdrop-blur-sm shadow-lg">
@@ -24,14 +31,15 @@ export default function Navbar() {
         <Link href={'/'}>
           <Image src="/favicon.ico" alt="Logo" width={40} height={40} />
         </Link>
-        <div className="flex space-x-px items-center">
+        <div onClick={() => router.push('/')} className="flex space-x-px items-center cursor-pointer">
           <span className='font-light text-foreground/80'>star</span>
           <span className="font-extrabold bg-linear-to-r from-primary to-primary-foreground bg-clip-text text-transparent">fsh</span>
         </div>
         <div className="hidden md:flex space-x-6 ml-4 text-foreground/80 text-sm items-center">
           <Link href="/docs" className="hover:text-primary transition-all hover:border-b hover:border-primary">Docs</Link>
-          <Link href="/about" className="hover:text-primary transition-all hover:border-b hover:border-primary">About</Link>
-          <Link href="/about" className="hover:text-primary transition-all hover:border-b hover:border-primary">Contact</Link>
+          <Link href="/docs/api" className="hover:text-primary transition-all hover:border-b hover:border-primary">API</Link>
+          <Link href="/pricing" className="hover:text-primary transition-all hover:border-b hover:border-primary">Pricing</Link>
+          <Link href="/support" className="hover:text-primary transition-all hover:border-b hover:border-primary">Support</Link>
         </div>
       </div>
 

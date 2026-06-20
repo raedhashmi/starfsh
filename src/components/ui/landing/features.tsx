@@ -17,8 +17,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/landing/card"
-import { Badge } from "./landing/badge"
+} from "@/components/ui/card"
+import { Badge } from "./badge"
 
 function FeatureIcon({ icon: Icon }: { icon: RemixiconComponentType }) {
   return (
@@ -148,7 +148,7 @@ export default function Features() {
         </p>
       </div>
 
-      <div className="mt-14 grid auto-rows-auto gap-5 grid-cols-6">
+      <div className="mt-14 grid auto-rows-auto gap-5 md:grid-cols-6 grid-cols-1">
         {features.map((f) => {
           const base = `bg-card ${f.muted ? 'bg-card/60' : ''} p-6 px-4 rounded-2xl ${f.col || ''} ${f.row || ''} border ${f.muted ? 'border-dashed border-border' : 'border-border'} ring-1 ring-foreground/5 transition-all duration-200 hover:border-primary/40 flex flex-col justify-between`
           return (
