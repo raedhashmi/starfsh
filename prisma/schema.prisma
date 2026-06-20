@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -13,67 +8,56 @@ datasource db {
 }
 
 model User {
-  id              String   @id @default(uuid())
-  username        String   @unique
-  email           String   @unique
-  password        String   // Secured/hashed string
-  acceptsMarketing Boolean  @default(false) // Your email checkbox!
-  createdAt       DateTime @default(now())
+  id       String   @id @default(uuid())
+  name     String?
+  email    String   @unique
+  password String?
 
-  // Relationships (Lego links to your other models)
-  apiKeys      ApiKey[]
-  repositories Repository[]
-  chats        Chat[]
+  acceptsMarketing Boolean      @default(false)
+  createdAt        DateTime     @default(now())
+  
+  apiKeys          ApiKey[]
+  chats            Chat[]
+  repositories     Repository[]
 }
 
 model ApiKey {
   id        String   @id @default(uuid())
-  key       String   @unique // The actual token text string
-  name      String   @default("Default Key") // e.g., "VS Code Extension"
+  key       String   @unique
+  name      String   @default("Default Key")
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
-
-  // Link back to the parent user
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Repository {
-  id             String   @id @default(uuid())
+  id             String    @id @default(uuid())
   repositoryName String
   repositoryLink String
-  pagesIoLink    String?  // Optional field (null if no github.io page exists)
-  summaryText    String?  @db.Text // Holds the deep AI-generated summary string
-  dateIndexed    DateTime? // Timestamp when the AI finished parsing the tree
-
-  createdAt      DateTime @default(now())
-
-  // Link back to the parent user
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pagesIoLink    String?
+  summaryText    String?
+  dateIndexed    DateTime?
+  createdAt      DateTime  @default(now())
+  userId         String
+  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Chat {
-  id        String   @id @default(uuid()) // The unique conversation UUID!
-  title     String   @default("New Code Session") // e.g., "Refactoring Navbar"
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Link back to the parent user
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  // One chat conversation holds multiple individual messages inside it
-  messages Message[]
+  id        String    @id @default(uuid())
+  title     String    @default("New Code Session")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  Message[]
 }
 
 model Message {
   id        String   @id @default(uuid())
-  role      String   // "user" or "assistant" (tells your UI who sent it)
-  content   String   @db.Text // Holds the text block or large code payloads
+  role      String
+  content   String
   createdAt DateTime @default(now())
-
-  // Link back to the parent Chat session
-  chatId String
-  chat   Chat   @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
 }

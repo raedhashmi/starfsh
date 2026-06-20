@@ -1,12 +1,12 @@
 import Navbar from '@/components/ui/navbar'
-import Hero from '@/components/ui/hero'
-import Stats from '@/components/ui/stats'
-import HowItWorks from '@/components/ui/how-it-works'
-import Features from '@/components/ui/features'
-import CTA from '@/components/ui/cta'
-import FAQ from '@/components/ui/faq'
-import Footer from '@/components/ui/footer'
-import { Marquee, MarqueeFade, MarqueeItem, MarqueeContent } from '@/components/ui/marquee'
+import Hero from '@/components/ui/landing/hero'
+import Stats from '@/components/ui/landing/stats'
+import HowItWorks from '@/components/ui/landing/how-it-works'
+import Features from '@/components/ui/landing/features'
+import CTA from '@/components/ui/landing/cta'
+import FAQ from '@/components/ui/landing/faq'
+import Footer from '@/components/ui/landing/footer'
+import { Marquee, MarqueeFade, MarqueeItem, MarqueeContent } from '@/components/ui/landing/marquee'
 
 export default function Home() {
    const companies = [

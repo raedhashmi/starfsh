@@ -2,14 +2,13 @@
 
 import Link from 'next/link'
 import { Input } from '../input'
-import { Label } from '../label'
 import { Button } from '../button'
-import { Switch } from '../switch'
+import { Spinner } from '../spinner'
 import React, { useState } from 'react'
+import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 import { loginUser } from "@/app/api/auth/actions"
-import { RiErrorWarningFill, RiGithubFill, RiGoogleFill, RiStarFill } from '@remixicon/react'
-import { Spinner } from '../spinner'
+import { RiErrorWarningFill, RiGithubFill, RiGoogleFill } from '@remixicon/react'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | null>(null)
@@ -57,11 +56,11 @@ export default function LoginForm() {
             <span className='text-xs tracking-wide uppercase text-foreground/30'>Continue with</span>
         </div>
         <div className='flex flex-row w-full mt-1 gap-2'>
-          <div className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
+          <div onClick={() => { signIn("github", { callbackUrl: "/dashboard" }); setLoading(true) }} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
             <RiGithubFill />
             <span className='text-foreground/70 text-sm'>Github</span>
           </div>
-          <div className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
+          <div onClick={() => { signIn("google", { callbackUrl: "/dashboard" }); setLoading(true) }} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
             <RiGoogleFill />
             <span className='text-foreground/70 text-sm'>Google</span>
           </div>

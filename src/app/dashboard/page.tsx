@@ -1,10 +1,11 @@
-import React from 'react'
+import { auth } from "@/auth"
 import Dashboard from '@/components/ui/dashboard/dashboard'
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+
   return (
     <main>
-        <Dashboard />
+      <Dashboard />
     </main>
   )
 }

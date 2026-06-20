@@ -17,7 +17,7 @@ export default function SignupForm() {
   const [agreedTC, setAgreedTC] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
-    username: '',
+    name: '',
     email: '',
     password: '',
     acceptsMarketing: false,
@@ -104,11 +104,11 @@ export default function SignupForm() {
             <span className='text-xs tracking-wide uppercase text-foreground/30'>Continue with</span>
         </div>
         <div className='flex flex-row w-full mt-1 gap-2'>
-          <div onClick={() => signIn("github", { callbackUrl: "/dashboard" })} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
+          <div onClick={() => { signIn("github", { callbackUrl: "/dashboard" }); setLoading(true) }} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
             <RiGithubFill />
             <span className='text-foreground/70 text-sm'>Github</span>
           </div>
-          <div onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
+          <div onClick={() => { signIn("google", { callbackUrl: "/dashboard" }); setLoading(true) }} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
             <RiGoogleFill />
             <span className='text-foreground/70 text-sm'>Google</span>
           </div>
@@ -123,7 +123,7 @@ export default function SignupForm() {
         <form className='flex flex-col w-full py-4 space-y-3' onSubmit={handleSubmit}>  
           <div> {/* Username */}
             <p className='text-sm text-foreground/70'>Username: </p>
-            <Input className='rounded-lg' type='text' placeholder='John Doe' value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
+            <Input className='rounded-lg' type='text' placeholder='John Doe' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
           <div> {/* Email */}
             <p className='text-sm text-foreground/70'>Email: </p>

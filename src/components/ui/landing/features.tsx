@@ -17,8 +17,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Badge } from "./badge"
+} from "@/components/ui/landing/card"
+import { Badge } from "./landing/badge"
 
 function FeatureIcon({ icon: Icon }: { icon: RemixiconComponentType }) {
   return (

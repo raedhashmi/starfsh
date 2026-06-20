@@ -4,10 +4,10 @@ import bcrypt from "bcryptjs"
 import { signIn } from "@/auth"
 import prisma from "@lib/prisma"
 
-export async function registerUser(data: { username: string, email: string, password: string, acceptsMarketing: boolean }) {
-  const { email, username, password, acceptsMarketing } = data
+export async function registerUser(data: { name: string, email: string, password: string, acceptsMarketing: boolean }) {
+  const { email, name, password, acceptsMarketing } = data
   
-  if (!email || !username || !password)  return { error: "Missing fields.", status: 400 }
+  if (!email || !name || !password)  return { error: "Missing fields.", status: 400 }
 
   try {
     const existingUser = await prisma.user.findUnique({ where: { email } })
@@ -17,7 +17,7 @@ export async function registerUser(data: { username: string, email: string, pass
     await prisma.user.create({
       data: {
         email,
-        username,
+        name,
         password: hashedPassword,
         acceptsMarketing: acceptsMarketing,
       },
@@ -43,7 +43,7 @@ export async function registerUser(data: { username: string, email: string, pass
 export async function loginUser(data: { useroremail: string; password: string }) {
   const { useroremail, password } = data
 
-  if (!useroremail || !password) return { error: "Missing fields.", status: 409 }
+  if (!useroremail || !password) return { error: "Missing fields.", status: 400 }
 
   try {
     await signIn("credentials", {
