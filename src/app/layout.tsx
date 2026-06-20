@@ -3,10 +3,23 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
-export const metadata: Metadata = {
-  title: "starfsh - Regen your codebase",
-  description: "starfsh is a AI-based tool",
-};
+export const metadata = {
+  title: "starfsh — AI GitHub Repo Analyzer",
+  description:
+    "Analyze, refactor, and document GitHub repositories using AI. starfsh scans your codebase and helps you regenerate, improve, and understand it instantly.",
+  metadataBase: new URL("https://starfsh.lrdevstudio.com"),
+  openGraph: {
+    title: "starfsh",
+    description: "AI-powered GitHub repository intelligence tool",
+    url: "https://starfsh.lrdevstudio.com",
+    siteName: "starfsh",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
 
 export default function RootLayout({
   children,

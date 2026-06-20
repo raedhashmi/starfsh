@@ -7,9 +7,13 @@ import { Button } from '../button'
 import { Switch } from '../switch'
 import { Spinner } from "../spinner"
 import React, { useState } from 'react'
-import { RiGithubFill, RiGoogleFill, RiStarFill } from '@remixicon/react'
+import { signIn } from "next-auth/react"
+import { useRouter } from 'next/navigation'
+import { registerUser } from "@/app/api/auth/actions"
+import { RiErrorWarningFill, RiGithubFill, RiGoogleFill, RiStarFill } from '@remixicon/react'
 
 export default function SignupForm() {
+  const [error, setError] = useState<string | null>(null)
   const [agreedTC, setAgreedTC] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -18,10 +22,34 @@ export default function SignupForm() {
     password: '',
     acceptsMarketing: false,
   })
+  const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Saving account data to Prisma:", formData)
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setError(null)
+    setLoading(true)
+
+    if (!agreedTC) {
+      setError("You must agree to the Terms and Conditions!")
+      setLoading(false)
+      return
+    }
+
+    try {
+      const result = await registerUser(formData)
+
+      if (result?.error) {
+        setError(result.error)
+        return
+      }
+
+      router.push("/login")
+    } catch (err) {
+      console.error(err)
+      setError("An unexpected error occurred.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -72,15 +100,15 @@ export default function SignupForm() {
           <h1 className='text-3xl font-semibold text-foreground/80'>Create your account</h1>
           <p className='text-sm text-foreground/70'>Regenerate your codebase within seconds</p>
         </div>
-        <div className='text-center mt-6'>
+        <div className='text-center mt-3'>
             <span className='text-xs tracking-wide uppercase text-foreground/30'>Continue with</span>
         </div>
         <div className='flex flex-row w-full mt-1 gap-2'>
-          <div className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
+          <div onClick={() => signIn("github", { callbackUrl: "/dashboard" })} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
             <RiGithubFill />
             <span className='text-foreground/70 text-sm'>Github</span>
           </div>
-          <div className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
+          <div onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className='flex h-min w-1/2 p-2 rounded-xl bg-card/30 hover:bg-card/60 border border-border items-center justify-center gap-2 duration-300 transition-all'>
             <RiGoogleFill />
             <span className='text-foreground/70 text-sm'>Google</span>
           </div>
@@ -92,7 +120,7 @@ export default function SignupForm() {
             <div className="grow border-t border-border" />
           </div>
         </div>
-        <form className='flex flex-col w-full mt-1 py-4 space-y-3' onSubmit={handleSubmit}>  
+        <form className='flex flex-col w-full py-4 space-y-3' onSubmit={handleSubmit}>  
           <div> {/* Username */}
             <p className='text-sm text-foreground/70'>Username: </p>
             <Input className='rounded-lg' type='text' placeholder='John Doe' value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
@@ -105,7 +133,7 @@ export default function SignupForm() {
             <p className='text-sm text-foreground/70'>Password: </p>
             <Input className='rounded-lg' type='password' placeholder='123456789' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
           </div>
-          <div className='flex flex-col gap-2 mt-4'>
+          <div className='flex flex-col gap-2 mt-1'>
             <div className='flex flex-row text-foreground/70 items-center gap-2'> {/* Promotions & Mail*/}
               <Switch id='promotions-and-mail' checked={formData.acceptsMarketing} onCheckedChange={(checked) => setFormData({ ...formData, acceptsMarketing: checked })} />
               <Label className='text-xs' htmlFor='promotions-and-mail' >I agree to receive promotions and updates about starfsh.</Label>
@@ -115,9 +143,16 @@ export default function SignupForm() {
               <Label className='text-xs' htmlFor='terms-and-conditions'>I agree to the <Button variant={"link"} className='p-0 -m-1 text-xs'>Terms & Conditions</Button></Label>
             </div>
           </div>
+          {error && (
+            <div className='flex bg-red-500/10 border-red-700/60 p-1 text-xs text-center items-center justify-center rounded-xl gap-2'>
+              <RiErrorWarningFill className="text-red-400/40" />
+              <span>{error}</span>
+            </div>
+          )}
+     
           <div className='flex flex-col'>
-            <Button className='mt-2'>{isLoading ? `${<Spinner />} Creating account...` : "Get Started"}</Button>
-            <span className='self-center text-sm mt-4'>Already have an account? <Link href={'/login'} className='text-blue-400 hover:underline'>Log in here!</Link></span>
+            <Button className='mt-1'>{isLoading ? <> <Spinner /> Creating account... </> : "Get Started"}</Button>
+            <span className='self-center text-xs mt-2'>Already have an account? <Link href={'/login'} className='text-blue-400 hover:underline'>Log in here!</Link></span>
           </div>
         </form>
       </div>

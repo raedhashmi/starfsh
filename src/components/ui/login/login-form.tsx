@@ -6,20 +6,41 @@ import { Label } from '../label'
 import { Button } from '../button'
 import { Switch } from '../switch'
 import React, { useState } from 'react'
-import { RiGithubFill, RiGoogleFill, RiStarFill } from '@remixicon/react'
+import { useRouter } from 'next/navigation'
+import { loginUser } from "@/app/api/auth/actions"
+import { RiErrorWarningFill, RiGithubFill, RiGoogleFill, RiStarFill } from '@remixicon/react'
+import { Spinner } from '../spinner'
 
 export default function LoginForm() {
-  const [agreedTC, setAgreedTC] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
-    username: '',
-    email: '',
+    useroremail: '',
     password: '',
-    acceptsMarketing: false,
   })
+  const router = useRouter()
+  
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    setError(null)
+    setLoading(true)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Saving account data to Prisma:", formData)
+    try {
+      const result = await loginUser(formData)
+
+      if (result?.error) {
+        setError(result.error)
+        return
+      }
+
+      router.push("/dashboard")
+      router.refresh()
+    } catch (err) {
+      console.error(err)
+      setError("An unexpected error occurred.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -52,21 +73,26 @@ export default function LoginForm() {
             <div className="grow border-t border-border" />
           </div>
         </div>
-        <div className='flex flex-col w-full mt-1 py-4 space-y-3'>
+        <form className='flex flex-col w-full mt-1 py-4 space-y-3' onSubmit={handleSubmit}>
           <div>
             <p className='text-sm text-foreground/70'>Username / Email: </p>
-            <Input className='rounded-lg' type='text' placeholder='John Doe / example@domain.com'></Input>
+            <Input className='rounded-lg' type='text' placeholder='John Doe / example@domain.com' value={formData.useroremail} onChange={(e) => setFormData({ ...formData, useroremail: e.target.value })}></Input>
           </div>
           <div>
             <p className='text-sm text-foreground/70'>Password: </p>
-            <Input className='rounded-lg' type='password' placeholder='123456789'></Input>
+            <Input className='rounded-lg' type='password' placeholder='123456789' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })}></Input>
           </div>
-
+          {error && (
+            <div className='flex bg-red-500/10 border-red-700/60 p-1 text-xs text-center items-center justify-center rounded-xl gap-2'>
+              <RiErrorWarningFill className="text-red-400/40" />
+              <span>{error}</span>
+            </div>
+          )}
           <div className='flex flex-col'>
-            <Button className='mt-2'>Get Started</Button>
+            <Button className='mt-2'>{isLoading ? <> <Spinner /> Loging in... </> : "Dive right in!"}</Button>
             <span className='self-center text-sm mt-4'>New here? <Link href={'/register'} className='text-blue-400 hover:underline'>Get started!</Link></span>
           </div>
-        </div>
+        </form>
       </div>
 
       <div className='hidden md:flex md:flex-col justify-betwen p-16 w-4/3 h-full bg-linear-to-br from-border to-primary-foreground'>
