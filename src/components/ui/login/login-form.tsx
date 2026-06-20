@@ -70,41 +70,56 @@ export default function LoginForm() {
       </div>
 
       <div className='hidden md:flex md:flex-col justify-betwen p-16 w-4/3 h-full bg-linear-to-br from-border to-primary-foreground'>
-
-        <div className="absolute top-10 right-10 w-75 h-75 bg-primary/35 blur-[120px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-20 left-10 w-50 h-50 bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
-
-        <div className="my-auto max-w-md w-full mx-auto flex flex-col gap-4 z-10 font-mono text-xs">
-
-          <div className="border border-border bg-card/40 backdrop-blur-md p-4 rounded-xl shadow-md flex flex-col gap-2">
-            <div className="flex items-center justify-between text-foreground/40 border-b border-border/40 pb-2">
-              <span>repository-index-stream</span>
-              <span className="text-primary-foreground/70 font-bold">86% Done</span>
-            </div>
-          
-            <div className="space-y-1 text-foreground/70 text-[11px]">
-              <p className="text-primary-foreground/70">● repositoryName: "starfsh-engine"</p>
-              <p>✔ repositoryLink: "://github.com"</p>
-              <p>✔ pagesIoLink: "raedh.github.io/starfsh" [Mapped]</p>
-              <p className="text-foreground/30">● dateIndexed: Updating local schema matrix...</p>
-            </div>
-          </div>
-
-          <div className="border border-border bg-background/80 p-4 rounded-xl shadow-lg flex flex-col gap-3 max-w-lg ml-auto border-l-2 border-l-primary">
-            <div className="flex items-center gap-1.5 text-foreground/40 text-[10px]">
-              <span>💬 chat-session-uuid: e2b4f9...</span>
-            </div>
-            <p className="text-sm font-sans font-semibold text-foreground leading-normal">
-              "Codebase scan complete. What do you want to edit or generate in your repository?"
-            </p>
-            <div className="h-7 bg-foreground/5 border border-border text-foreground/40 text-[11px] px-3 rounded-lg flex items-center select-none cursor-not-allowed">
-              Generate a readme...
-            </div>
-          </div>
+        <div className="inline-flex max-w-fit items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border border-border bg-card/60 text-foreground/60 backdrop-blur-md z-10">
+          <span className="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+          Active Workspace Session
         </div>
 
+        <div className="my-auto max-w-md w-full mx-auto flex flex-col gap-4 z-10 font-mono text-xs">
+          
+          <div className="border border-border bg-card/40 backdrop-blur-md p-4 rounded-xl shadow-sm flex flex-col gap-2">
+            <div className="flex items-center justify-between text-foreground/40 border-b border-border/40 pb-2 text-[10px]">
+              <span>starfsh - component-patch</span>
+              <span className="text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">Compiled</span>
+            </div>
+            
+            <div className="space-y-1.5 text-[11px] pt-1">
+              <p className="text-foreground/30">// Refactored Next.js Navigation Loop</p>
+              <p className="text-primary"><span className="text-foreground/40">export default function</span> Navbar() <span className="text-foreground/40">{'{'}</span></p>
+              <div className="pl-4 space-y-1">
+                <p className="text-foreground/70">return (</p>
+                <p className="text-emerald-400 pl-4 bg-emerald-500/5 border-l border-emerald-500/40">{"<nav className='sticky top-0 bg-background/60 backdrop-blur-md'>"} </p>
+                <p className="text-foreground/50 pl-8">{"{links.map((link) => <NavLink key={link.id} {...link} />)}"}</p>
+                <p className="text-foreground/70 pl-4">)</p>
+              </div>
+              <p className="text-foreground/40">{"}"}</p>
+            </div>
+          </div>
+
+          {/* Box 2: The Continuous Chat Playground Tracker */}
+          <div className="border border-border bg-background/90 p-4 rounded-xl shadow-lg flex flex-col gap-3 max-w-sm ml-auto border-l-2 border-l-primary">
+            <div className="flex items-center justify-between text-foreground/40 text-[10px]">
+              <span>💬 active-session: uuid-a8f2</span>
+              <span>2 mins ago</span>
+            </div>
+            <div className="flex gap-2 items-start bg-foreground/5 p-2 rounded-lg border border-border/40">
+              <span className="text-primary text-xs shrink-0">👤</span>
+              <p className="text-[11px] font-sans text-foreground/70 leading-normal">
+                "Now take that navbar component and build an active mobile slide drawer using the Shadcn Sheet component blocks."
+              </p>
+            </div>
+            <div className="flex justify-end pt-1">
+              <div className="h-6 px-3 bg-primary text-primary-foreground text-[10px] font-sans font-semibold rounded-md flex items-center shadow-xs">
+                Regenerating Component Layer...
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* 🔒 LOWER META DESCRIPTION */}
         <div className="text-xs text-foreground/70 font-light z-10 leading-relaxed max-w-xs">
-          Secure workspace integration console. Authenticating via Prisma client instance protocols.
+          Continuous code tracking center. Authenticated session active on secure host loop.
         </div>
       </div>
     </div>

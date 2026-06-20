@@ -5,11 +5,13 @@ import { Input } from '../input'
 import { Label } from '../label'
 import { Button } from '../button'
 import { Switch } from '../switch'
+import { Spinner } from "../spinner"
 import React, { useState } from 'react'
 import { RiGithubFill, RiGoogleFill, RiStarFill } from '@remixicon/react'
 
 export default function SignupForm() {
   const [agreedTC, setAgreedTC] = useState(false)
+  const [isLoading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -83,44 +85,41 @@ export default function SignupForm() {
             <span className='text-foreground/70 text-sm'>Google</span>
           </div>
         </div>
-        <div className="mt-6 w-full">
+        <div className="mt-5 w-full">
           <div className="flex items-center w-full">
             <div className="grow border-t border-border" />
             <span className="px-3 text-xs uppercase text-foreground/30 bg-background">Or continue with</span>
             <div className="grow border-t border-border" />
           </div>
         </div>
-        <div className='flex flex-col w-full mt-1 py-4 space-y-3'>
-          <div>
+        <form className='flex flex-col w-full mt-1 py-4 space-y-3' onSubmit={handleSubmit}>  
+          <div> {/* Username */}
             <p className='text-sm text-foreground/70'>Username: </p>
-            <Input className='rounded-lg' type='text' placeholder='John Doe'></Input>
+            <Input className='rounded-lg' type='text' placeholder='John Doe' value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
           </div>
-          <div>
+          <div> {/* Email */}
             <p className='text-sm text-foreground/70'>Email: </p>
-            <Input className='rounded-lg' type='email' placeholder='example@domain.com'></Input>
+            <Input className='rounded-lg' type='email' placeholder='example@domain.com' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
           </div>
-          <div>
+          <div> {/* Password */}
             <p className='text-sm text-foreground/70'>Password: </p>
-            <Input className='rounded-lg' type='password' placeholder='123456789'></Input>
+            <Input className='rounded-lg' type='password' placeholder='123456789' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
           </div>
-
           <div className='flex flex-col gap-2 mt-4'>
-            <div className='flex flex-row text-foreground/70 items-center gap-2'>
-              <Switch id='promotions-and-mail' defaultChecked />
+            <div className='flex flex-row text-foreground/70 items-center gap-2'> {/* Promotions & Mail*/}
+              <Switch id='promotions-and-mail' checked={formData.acceptsMarketing} onCheckedChange={(checked) => setFormData({ ...formData, acceptsMarketing: checked })} />
               <Label className='text-xs' htmlFor='promotions-and-mail' >I agree to receive promotions and updates about starfsh.</Label>
             </div>
-
-            <div className='flex flex-row text-foreground/70 items-center gap-2'>
+            <div className='flex flex-row text-foreground/70 items-center gap-2'> {/* T&C */}
               <Switch id='terms-and-conditions' checked={agreedTC} onCheckedChange={(c) => setAgreedTC(c)} />
               <Label className='text-xs' htmlFor='terms-and-conditions'>I agree to the <Button variant={"link"} className='p-0 -m-1 text-xs'>Terms & Conditions</Button></Label>
             </div>
           </div>
-
           <div className='flex flex-col'>
-            <Button className='mt-2'>Get Started</Button>
+            <Button className='mt-2'>{isLoading ? `${<Spinner />} Creating account...` : "Get Started"}</Button>
             <span className='self-center text-sm mt-4'>Already have an account? <Link href={'/login'} className='text-blue-400 hover:underline'>Log in here!</Link></span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   )
