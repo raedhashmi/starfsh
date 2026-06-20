@@ -35,6 +35,16 @@ export default function SignupForm() {
       return
     }
 
+    if (formData.password.length < 8) {
+      setError("Password must be at least 8 characters long.")
+      setLoading(false)
+      return
+    } else if (!/\d/.test(formData.password) || !/[^A-Za-z0-9]/.test(formData.password)) {
+      setError("Password must include at least one number and one special character.")
+      setLoading(false)
+      return
+    }
+
     try {
       const result = await registerUser(formData)
 
@@ -131,7 +141,7 @@ export default function SignupForm() {
           </div>
           <div> {/* Password */}
             <p className='text-sm text-foreground/70'>Password: </p>
-            <Input className='rounded-lg' type='password' placeholder='123456789' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+            <Input className='rounded-lg' type='password' placeholder='••••••••' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
           </div>
           <div className='flex flex-col gap-2 mt-1'>
             <div className='flex flex-row text-foreground/70 items-center gap-2'> {/* Promotions & Mail*/}
@@ -140,7 +150,7 @@ export default function SignupForm() {
             </div>
             <div className='flex flex-row text-foreground/70 items-center gap-2'> {/* T&C */}
               <Switch id='terms-and-conditions' checked={agreedTC} onCheckedChange={(c) => setAgreedTC(c)} />
-              <Label className='text-xs' htmlFor='terms-and-conditions'>I agree to the <Button variant={"link"} className='p-0 -m-1 text-xs'>Terms & Conditions</Button></Label>
+              <Label className='text-xs' htmlFor='terms-and-conditions'>I agree to the <Button variant={"link"} onClick={() => router.push('/terms-and-conditions')} className='p-0 -m-1 text-xs'>Terms & Conditions</Button></Label>
             </div>
           </div>
           {error && (

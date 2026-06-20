@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/ui/dashboard/tooltip"
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export const metadata = {
@@ -30,7 +31,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning> 
       <body className={cn("h-full", "antialiased", "font-sans")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
+          <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -13,17 +13,11 @@ import {
   SheetClose,
 } from "./sheet"
 import { Button } from "./button"
-import { auth } from "@/auth"
 import { useRouter } from "next/navigation"
 import { RiMenuLine } from "@remixicon/react"
 
-export default async function Navbar() {
-  const session = await auth()
+export default function Navbar() {
   const router = useRouter()
-
-  if (!session?.user) {
-    router.push("/login")
-  }
 
   return (
     <nav className="flex fixed top-4 inset-x-0 mx-auto p-4 px-8 w-[80%] h-16 z-20 rounded-3xl items-center justify-between border border-primary/20 bg-primary/10 backdrop-blur-sm shadow-lg">
