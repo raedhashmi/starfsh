@@ -1,8 +1,16 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import { cn } from "@/lib/utils";
-import { TooltipProvider } from "@/components/ui/dashboard/tooltip"
+import type { Metadata } from "next";
+import { Ubuntu_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { TooltipProvider } from "@/components/ui/dashboard/tooltip"
+
+const ubuntuSans = Ubuntu_Sans({
+  subsets: ["latin"],
+  weight: ["100","200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-ubuntu-sans",
+  display: "swap",
+});
 
 export const metadata = {
   title: "starfsh",
@@ -28,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning> 
+    <html className={ubuntuSans.variable} lang="en" suppressHydrationWarning> 
       <body className={cn("h-full", "antialiased", "font-sans")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TooltipProvider>{children}</TooltipProvider>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button } from './button'
+import Link from 'next/link'
+import { Button } from '../button'
 import MockWin from './mock-window'
 
 export default function Hero() {
@@ -14,7 +15,7 @@ export default function Hero() {
             Let starfsh scan your codebase, then watch as the possibilities unfold. With one command, you can generate documentation, and even refactor your code. It's like having a coding assistant that understands your mind.
           </p>
 
-          <Button className='mt-4 transition-all duration-200 hover:scale-101 hover:shadow-[0_0_8px_rgba(230,200,24,0.6)]'>Get Started</Button>
+          <Link href={'/register'} className='w-full'><Button className='w-full mt-4 transition-all duration-200 hover:scale-101 hover:shadow-[0_0_8px_rgba(230,200,24,0.6)]'>Get Started</Button></Link>
         </div>
       </div>
 

@@ -18,6 +18,7 @@ async function main() {
       password: hashedPassword,
       acceptsMarketing: true,
       createdAt: new Date(),
+      image: "https://avatars.githubusercontent.com/u/163880042?v=4",
       apiKeys: {
         create: {
           key: "fsh_OzKfRKANLzaKanIsba0FruPxCuqs+HZHqUoCGotntwM=",
@@ -33,6 +34,24 @@ async function main() {
           summaryText: "starfsh is a tool for generating codebase summaries.",
         },
       },
+      chats: {
+        create: {
+          id: "5967c879-6078-43bc-b7fa-06361c528a2a",
+          title: "Regenerate part of code",
+          messages: {
+            create: [
+              {
+                role: 'user',
+                content: 'Please regenerate the selected part of the code.',
+              },
+              {
+                role: 'assistant',
+                content: 'Sure, please paste the code snippet in the chat so that I can review and regenrate your code.',
+              }
+            ],
+          },
+        }
+      }
     },
   });
   console.log(user);

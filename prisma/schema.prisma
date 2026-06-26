@@ -8,17 +8,18 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String?
-  email    String   @unique
+  email    String  @unique
   password String?
+  image    String?
 
-  acceptsMarketing Boolean      @default(false)
-  createdAt        DateTime     @default(now())
-  
-  apiKeys          ApiKey[]
-  chats            Chat[]
-  repositories     Repository[]
+  acceptsMarketing Boolean  @default(false)
+  createdAt        DateTime @default(now())
+
+  apiKeys      ApiKey[]
+  chats        Chat[]
+  repositories Repository[]
 }
 
 model ApiKey {
@@ -32,31 +33,37 @@ model ApiKey {
 }
 
 model Repository {
-  id             String    @id @default(uuid())
+  id             String       @id @default(uuid())
   repositoryName String
   repositoryLink String
+
   pagesIoLink    String?
   summaryText    String?
+
+  status         String       @default("pending")
   dateIndexed    DateTime?
-  createdAt      DateTime  @default(now())
+  createdAt      DateTime     @default(now())
   userId         String
-  user           User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user    User                @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Chat {
-  id        String    @id @default(uuid())
-  title     String    @default("New Code Session")
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  userId    String
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  messages  Message[]
+  id            String    @id @default(uuid())
+  title         String    @default("New Code Session")
+  repositoryId  String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages      Message[]
 }
 
 model Message {
   id        String   @id @default(uuid())
   role      String
   content   String
+  
   createdAt DateTime @default(now())
   chatId    String
   chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)

@@ -133,23 +133,23 @@ export default function SignupForm() {
         <form className='flex flex-col w-full py-4 space-y-3' onSubmit={handleSubmit}>  
           <div> {/* Username */}
             <p className='text-sm text-foreground/70'>Username: </p>
-            <Input className='rounded-lg' type='text' placeholder='John Doe' value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+            <Input className='rounded-lg' type='text' placeholder='John Doe' disabled={isLoading} value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
           </div>
           <div> {/* Email */}
             <p className='text-sm text-foreground/70'>Email: </p>
-            <Input className='rounded-lg' type='email' placeholder='example@domain.com' value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+            <Input className='rounded-lg' type='email' placeholder='example@domain.com' disabled={isLoading} value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
           </div>
           <div> {/* Password */}
             <p className='text-sm text-foreground/70'>Password: </p>
-            <Input className='rounded-lg' type='password' placeholder='••••••••' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+            <Input className='rounded-lg' type='password' placeholder='••••••••' disabled={isLoading} value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
           </div>
           <div className='flex flex-col gap-2 mt-1'>
             <div className='flex flex-row text-foreground/70 items-center gap-2'> {/* Promotions & Mail*/}
-              <Switch id='promotions-and-mail' checked={formData.acceptsMarketing} onCheckedChange={(checked) => setFormData({ ...formData, acceptsMarketing: checked })} />
+              <Switch id='promotions-and-mail' disabled={isLoading} checked={formData.acceptsMarketing} onCheckedChange={(checked) => setFormData({ ...formData, acceptsMarketing: checked })} />
               <Label className='text-xs' htmlFor='promotions-and-mail' >I agree to receive promotions and updates about starfsh.</Label>
             </div>
             <div className='flex flex-row text-foreground/70 items-center gap-2'> {/* T&C */}
-              <Switch id='terms-and-conditions' checked={agreedTC} onCheckedChange={(c) => setAgreedTC(c)} />
+              <Switch id='terms-and-conditions' disabled={isLoading} checked={agreedTC} onCheckedChange={(c) => setAgreedTC(c)} />
               <Label className='text-xs' htmlFor='terms-and-conditions'>I agree to the <Button variant={"link"} onClick={() => router.push('/terms-and-conditions')} className='p-0 -m-1 text-xs'>Terms & Conditions</Button></Label>
             </div>
           </div>

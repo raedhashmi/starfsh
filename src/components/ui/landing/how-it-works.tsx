@@ -27,7 +27,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <div className='mt-32'>
+    <div id="how-it-works" className='mt-32'>
       <div className="flex flex-col items-center text-center">
         <span className="text-sm font-medium uppercase tracking-widest text-primary">How it works</span>
         <h2 className="mt-3 max-w-2xl text-balance text-3xl font-bold md:text-5xl">

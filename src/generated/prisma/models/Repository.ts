@@ -30,6 +30,7 @@ export type RepositoryMinAggregateOutputType = {
   repositoryLink: string | null
   pagesIoLink: string | null
   summaryText: string | null
+  status: string | null
   dateIndexed: Date | null
   createdAt: Date | null
   userId: string | null
@@ -41,6 +42,7 @@ export type RepositoryMaxAggregateOutputType = {
   repositoryLink: string | null
   pagesIoLink: string | null
   summaryText: string | null
+  status: string | null
   dateIndexed: Date | null
   createdAt: Date | null
   userId: string | null
@@ -52,6 +54,7 @@ export type RepositoryCountAggregateOutputType = {
   repositoryLink: number
   pagesIoLink: number
   summaryText: number
+  status: number
   dateIndexed: number
   createdAt: number
   userId: number
@@ -65,6 +68,7 @@ export type RepositoryMinAggregateInputType = {
   repositoryLink?: true
   pagesIoLink?: true
   summaryText?: true
+  status?: true
   dateIndexed?: true
   createdAt?: true
   userId?: true
@@ -76,6 +80,7 @@ export type RepositoryMaxAggregateInputType = {
   repositoryLink?: true
   pagesIoLink?: true
   summaryText?: true
+  status?: true
   dateIndexed?: true
   createdAt?: true
   userId?: true
@@ -87,6 +92,7 @@ export type RepositoryCountAggregateInputType = {
   repositoryLink?: true
   pagesIoLink?: true
   summaryText?: true
+  status?: true
   dateIndexed?: true
   createdAt?: true
   userId?: true
@@ -171,6 +177,7 @@ export type RepositoryGroupByOutputType = {
   repositoryLink: string
   pagesIoLink: string | null
   summaryText: string | null
+  status: string
   dateIndexed: Date | null
   createdAt: Date
   userId: string
@@ -203,6 +210,7 @@ export type RepositoryWhereInput = {
   repositoryLink?: Prisma.StringFilter<"Repository"> | string
   pagesIoLink?: Prisma.StringNullableFilter<"Repository"> | string | null
   summaryText?: Prisma.StringNullableFilter<"Repository"> | string | null
+  status?: Prisma.StringFilter<"Repository"> | string
   dateIndexed?: Prisma.DateTimeNullableFilter<"Repository"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Repository"> | Date | string
   userId?: Prisma.StringFilter<"Repository"> | string
@@ -215,6 +223,7 @@ export type RepositoryOrderByWithRelationInput = {
   repositoryLink?: Prisma.SortOrder
   pagesIoLink?: Prisma.SortOrderInput | Prisma.SortOrder
   summaryText?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   dateIndexed?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -230,6 +239,7 @@ export type RepositoryWhereUniqueInput = Prisma.AtLeast<{
   repositoryLink?: Prisma.StringFilter<"Repository"> | string
   pagesIoLink?: Prisma.StringNullableFilter<"Repository"> | string | null
   summaryText?: Prisma.StringNullableFilter<"Repository"> | string | null
+  status?: Prisma.StringFilter<"Repository"> | string
   dateIndexed?: Prisma.DateTimeNullableFilter<"Repository"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Repository"> | Date | string
   userId?: Prisma.StringFilter<"Repository"> | string
@@ -242,6 +252,7 @@ export type RepositoryOrderByWithAggregationInput = {
   repositoryLink?: Prisma.SortOrder
   pagesIoLink?: Prisma.SortOrderInput | Prisma.SortOrder
   summaryText?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
   dateIndexed?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -259,6 +270,7 @@ export type RepositoryScalarWhereWithAggregatesInput = {
   repositoryLink?: Prisma.StringWithAggregatesFilter<"Repository"> | string
   pagesIoLink?: Prisma.StringNullableWithAggregatesFilter<"Repository"> | string | null
   summaryText?: Prisma.StringNullableWithAggregatesFilter<"Repository"> | string | null
+  status?: Prisma.StringWithAggregatesFilter<"Repository"> | string
   dateIndexed?: Prisma.DateTimeNullableWithAggregatesFilter<"Repository"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Repository"> | Date | string
   userId?: Prisma.StringWithAggregatesFilter<"Repository"> | string
@@ -270,6 +282,7 @@ export type RepositoryCreateInput = {
   repositoryLink: string
   pagesIoLink?: string | null
   summaryText?: string | null
+  status?: string
   dateIndexed?: Date | string | null
   createdAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutRepositoriesInput
@@ -281,6 +294,7 @@ export type RepositoryUncheckedCreateInput = {
   repositoryLink: string
   pagesIoLink?: string | null
   summaryText?: string | null
+  status?: string
   dateIndexed?: Date | string | null
   createdAt?: Date | string
   userId: string
@@ -292,6 +306,7 @@ export type RepositoryUpdateInput = {
   repositoryLink?: Prisma.StringFieldUpdateOperationsInput | string
   pagesIoLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   dateIndexed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutRepositoriesNestedInput
@@ -303,6 +318,7 @@ export type RepositoryUncheckedUpdateInput = {
   repositoryLink?: Prisma.StringFieldUpdateOperationsInput | string
   pagesIoLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   dateIndexed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -314,6 +330,7 @@ export type RepositoryCreateManyInput = {
   repositoryLink: string
   pagesIoLink?: string | null
   summaryText?: string | null
+  status?: string
   dateIndexed?: Date | string | null
   createdAt?: Date | string
   userId: string
@@ -325,6 +342,7 @@ export type RepositoryUpdateManyMutationInput = {
   repositoryLink?: Prisma.StringFieldUpdateOperationsInput | string
   pagesIoLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   dateIndexed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -335,6 +353,7 @@ export type RepositoryUncheckedUpdateManyInput = {
   repositoryLink?: Prisma.StringFieldUpdateOperationsInput | string
   pagesIoLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   dateIndexed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -356,6 +375,7 @@ export type RepositoryCountOrderByAggregateInput = {
   repositoryLink?: Prisma.SortOrder
   pagesIoLink?: Prisma.SortOrder
   summaryText?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   dateIndexed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -367,6 +387,7 @@ export type RepositoryMaxOrderByAggregateInput = {
   repositoryLink?: Prisma.SortOrder
   pagesIoLink?: Prisma.SortOrder
   summaryText?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   dateIndexed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -378,6 +399,7 @@ export type RepositoryMinOrderByAggregateInput = {
   repositoryLink?: Prisma.SortOrder
   pagesIoLink?: Prisma.SortOrder
   summaryText?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   dateIndexed?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -425,10 +447,6 @@ export type RepositoryUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.RepositoryScalarWhereInput | Prisma.RepositoryScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
@@ -439,6 +457,7 @@ export type RepositoryCreateWithoutUserInput = {
   repositoryLink: string
   pagesIoLink?: string | null
   summaryText?: string | null
+  status?: string
   dateIndexed?: Date | string | null
   createdAt?: Date | string
 }
@@ -449,6 +468,7 @@ export type RepositoryUncheckedCreateWithoutUserInput = {
   repositoryLink: string
   pagesIoLink?: string | null
   summaryText?: string | null
+  status?: string
   dateIndexed?: Date | string | null
   createdAt?: Date | string
 }
@@ -488,6 +508,7 @@ export type RepositoryScalarWhereInput = {
   repositoryLink?: Prisma.StringFilter<"Repository"> | string
   pagesIoLink?: Prisma.StringNullableFilter<"Repository"> | string | null
   summaryText?: Prisma.StringNullableFilter<"Repository"> | string | null
+  status?: Prisma.StringFilter<"Repository"> | string
   dateIndexed?: Prisma.DateTimeNullableFilter<"Repository"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Repository"> | Date | string
   userId?: Prisma.StringFilter<"Repository"> | string
@@ -499,6 +520,7 @@ export type RepositoryCreateManyUserInput = {
   repositoryLink: string
   pagesIoLink?: string | null
   summaryText?: string | null
+  status?: string
   dateIndexed?: Date | string | null
   createdAt?: Date | string
 }
@@ -509,6 +531,7 @@ export type RepositoryUpdateWithoutUserInput = {
   repositoryLink?: Prisma.StringFieldUpdateOperationsInput | string
   pagesIoLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   dateIndexed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -519,6 +542,7 @@ export type RepositoryUncheckedUpdateWithoutUserInput = {
   repositoryLink?: Prisma.StringFieldUpdateOperationsInput | string
   pagesIoLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   dateIndexed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -529,6 +553,7 @@ export type RepositoryUncheckedUpdateManyWithoutUserInput = {
   repositoryLink?: Prisma.StringFieldUpdateOperationsInput | string
   pagesIoLink?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   summaryText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
   dateIndexed?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -541,6 +566,7 @@ export type RepositorySelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   repositoryLink?: boolean
   pagesIoLink?: boolean
   summaryText?: boolean
+  status?: boolean
   dateIndexed?: boolean
   createdAt?: boolean
   userId?: boolean
@@ -553,6 +579,7 @@ export type RepositorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   repositoryLink?: boolean
   pagesIoLink?: boolean
   summaryText?: boolean
+  status?: boolean
   dateIndexed?: boolean
   createdAt?: boolean
   userId?: boolean
@@ -565,6 +592,7 @@ export type RepositorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   repositoryLink?: boolean
   pagesIoLink?: boolean
   summaryText?: boolean
+  status?: boolean
   dateIndexed?: boolean
   createdAt?: boolean
   userId?: boolean
@@ -577,12 +605,13 @@ export type RepositorySelectScalar = {
   repositoryLink?: boolean
   pagesIoLink?: boolean
   summaryText?: boolean
+  status?: boolean
   dateIndexed?: boolean
   createdAt?: boolean
   userId?: boolean
 }
 
-export type RepositoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "repositoryName" | "repositoryLink" | "pagesIoLink" | "summaryText" | "dateIndexed" | "createdAt" | "userId", ExtArgs["result"]["repository"]>
+export type RepositoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "repositoryName" | "repositoryLink" | "pagesIoLink" | "summaryText" | "status" | "dateIndexed" | "createdAt" | "userId", ExtArgs["result"]["repository"]>
 export type RepositoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -604,6 +633,7 @@ export type $RepositoryPayload<ExtArgs extends runtime.Types.Extensions.Internal
     repositoryLink: string
     pagesIoLink: string | null
     summaryText: string | null
+    status: string
     dateIndexed: Date | null
     createdAt: Date
     userId: string
@@ -1036,6 +1066,7 @@ export interface RepositoryFieldRefs {
   readonly repositoryLink: Prisma.FieldRef<"Repository", 'String'>
   readonly pagesIoLink: Prisma.FieldRef<"Repository", 'String'>
   readonly summaryText: Prisma.FieldRef<"Repository", 'String'>
+  readonly status: Prisma.FieldRef<"Repository", 'String'>
   readonly dateIndexed: Prisma.FieldRef<"Repository", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Repository", 'DateTime'>
   readonly userId: Prisma.FieldRef<"Repository", 'String'>

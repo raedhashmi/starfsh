@@ -10,8 +10,8 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main>
-      <Dashboard />
+    <main className="rounded-xl bg-radial from-border to-background">
+      <Dashboard session={session}/>
     </main>
   )
 }

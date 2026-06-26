@@ -1,5 +1,3 @@
-'use client'
-
 import Link from "next/link"
 import Image from "next/image"
 import { 
@@ -12,23 +10,23 @@ import {
   SheetFooter,
   SheetClose,
 } from "./sheet"
+import { auth } from "@/auth"
 import { Button } from "./button"
-import { useRouter } from "next/navigation"
 import { RiMenuLine } from "@remixicon/react"
 
-export default function Navbar() {
-  const router = useRouter()
-
+export default async function Navbar() {
+  const session = await auth()
+  
   return (
     <nav className="flex fixed top-4 inset-x-0 mx-auto p-4 px-8 w-[80%] h-16 z-20 rounded-3xl items-center justify-between border border-primary/20 bg-primary/10 backdrop-blur-sm shadow-lg">
       <div className="flex text-lg items-center space-x-4">
         <Link href={'/'}>
           <Image src="/favicon.ico" alt="Logo" width={40} height={40} />
         </Link>
-        <div onClick={() => router.push('/')} className="flex space-x-px items-center cursor-pointer">
+        <Link href={'/'} className="flex space-x-px items-center cursor-pointer">
           <span className='font-light text-foreground/80'>star</span>
           <span className="font-extrabold bg-linear-to-r from-primary to-primary-foreground bg-clip-text text-transparent">fsh</span>
-        </div>
+        </Link>
         <div className="hidden md:flex space-x-6 ml-4 text-foreground/80 text-sm items-center">
           <Link href="/docs" className="hover:text-primary transition-all hover:border-b hover:border-primary">Docs</Link>
           <Link href="/docs/api" className="hover:text-primary transition-all hover:border-b hover:border-primary">API</Link>
@@ -38,8 +36,14 @@ export default function Navbar() {
       </div>
 
       <div className="hidden md:flex space-x-4">
-        <Button variant="outline" className="text-foreground/80 hover:text-primary hover:border-primary" onClick={() => router.push('/login')}>Login</Button>
-        <Button className="bg-primary text-foreground hover:bg-primary-foreground" onClick={() => router.push('/register')}>Register</Button>
+        {!session ? 
+          <>
+            <Link href="/login"><Button variant="outline" className="text-foreground/80 hover:text-primary hover:border-primary">Login</Button></Link>
+            <Link href="/register"><Button className="bg-primary text-foreground hover:bg-primary-foreground">Register</Button></Link>
+          </>
+        :
+          <Link href="/dashboard"><Button className="bg-primary text-foreground hover:bg-primary-foreground">Dashboard</Button></Link>
+        }
       </div>
 
       <div className='md:hidden flex items-center'>
@@ -55,8 +59,14 @@ export default function Navbar() {
               <Link href="/contact" className="hover:text-primary transition-all hover:border-b hover:border-primary">Contact</Link>
             </div>
             <SheetFooter className="">
-              <Button variant="outline" className="w-full mb-2 text-foreground/80 hover:text-primary hover:border-primary" onClick={() => router.push('/login')}>Login</Button>
-              <Button className="w-full bg-primary text-foreground hover:bg-primary-foreground" onClick={() => router.push('/register')}>Register</Button>
+              {!session ? 
+                <>
+                  <Link href={'/login'}><Button variant="outline" className="w-full mb-2 text-foreground/80 hover:text-primary hover:border-primary">Login</Button></Link>
+                  <Link href={'/register'}><Button className="w-full bg-primary text-foreground hover:bg-primary-foreground">Register</Button></Link>
+                </>
+              :
+                <Link href="/dashboard"><Button className="bg-primary text-foreground hover:bg-primary-foreground">Dashboard</Button></Link>
+              }
             </SheetFooter>
           </SheetContent>
         </Sheet>

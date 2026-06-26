@@ -75,11 +75,11 @@ export default function LoginForm() {
         <form className='flex flex-col w-full mt-1 py-4 space-y-3' onSubmit={handleSubmit}>
           <div>
             <p className='text-sm text-foreground/70'>Username / Email: </p>
-            <Input className='rounded-lg' type='text' placeholder='John Doe / example@domain.com' value={formData.useroremail} onChange={(e) => setFormData({ ...formData, useroremail: e.target.value })}></Input>
+            <Input className='rounded-lg' type='text' disabled={isLoading} placeholder='John Doe / example@domain.com' value={formData.useroremail} onChange={(e) => setFormData({ ...formData, useroremail: e.target.value })}></Input>
           </div>
           <div>
             <p className='text-sm text-foreground/70'>Password: </p>
-            <Input className='rounded-lg' type='password' placeholder='123456789' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })}></Input>
+            <Input className='rounded-lg' type='password' disabled={isLoading} placeholder='123456789' value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })}></Input>
           </div>
           {error && (
             <div className='flex bg-red-500/10 border-red-700/60 p-1 text-xs text-center items-center justify-center rounded-xl gap-2'>

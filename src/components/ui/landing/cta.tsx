@@ -1,8 +1,14 @@
-import React from 'react'
-import { Button } from './button'
+'use client'
+
+import Link from 'next/link'
+import { useState } from 'react'
+import { Button } from '../button'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../dashboard/input-group'
 import { RiGithubLine, RiArrowRightLine } from '@remixicon/react'
 
 export default function CTA() {
+  const [link, setLink] = useState('')
+
   return (
     <section className="mt-32">
       <div className="relative overflow-hidden rounded-3xl border border-primary/20 bg-primary/5 px-6 py-14 text-center md:px-16 md:py-20">
@@ -20,14 +26,16 @@ export default function CTA() {
           </p>
 
           <div className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
-            <div className="flex w-full items-center gap-2 rounded-2xl border border-border bg-background px-4 py-3 text-left">
-              <RiGithubLine size={18} className="shrink-0 text-foreground/50" />
-              <span className="truncate text-sm text-foreground/40">github.com/your-username/your-repo</span>
-            </div>
-            <Button className="h-12 shrink-0 px-6 transition-all duration-200 hover:scale-101 hover:shadow-[0_0_8px_rgba(230,200,24,0.6)] sm:w-auto">
+            <InputGroup>
+              <InputGroupInput onChange={(e) => setLink(e.target.value)} placeholder="https://github.com/your-name/project" />
+              <InputGroupAddon>
+                <RiGithubLine />
+              </InputGroupAddon>
+            </InputGroup>
+            <Link href={`/register?add-repo=${link}`}><Button className="shrink-0 px-6 transition-all duration-200 hover:scale-101 hover:shadow-[0_0_8px_rgba(230,200,24,0.6)] sm:w-auto">
               Scan it
               <RiArrowRightLine size={16} />
-            </Button>
+            </Button></Link>
           </div>
 
           <p className="mt-4 text-xs text-foreground/50">No credit card required · Works with any public repo</p>

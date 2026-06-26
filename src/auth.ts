@@ -17,6 +17,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     GitHub({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          email: profile.email,
+          image: profile.avatar_url, // 🔥 THIS is the key
+        }
+      },
     }),
 
     Credentials({
@@ -50,20 +58,43 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           id: user.id,
           name: user.name,
           email: user.email,
+          image: user.image,
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user?.email) {
-        const dbUser = await prisma.user.findUnique({
+    async signIn({ user, account, profile }) {
+      console.log(user, account, profile)
+      if (account?.provider !== "credentials" && user.email) {
+        const image = (profile as any)?.picture ?? user.image
+
+        const dbUser = await prisma.user.upsert({
           where: { email: user.email },
+          update: {
+            name: user.name ?? "",
+            image,
+          },
+          create: {
+            email: user.email,
+            name: user.name ?? "",
+            image,
+          },
         })
 
-        if (dbUser) {
-          token.id = dbUser.id
-        }
+        user.id = dbUser.id
+        user.image = dbUser.image
+      }
+
+      return true
+    },
+    
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.name = user.name
+        token.email = user.email
+        token.picture = user.image
       }
 
       return token
@@ -72,7 +103,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string
+        session.user.name = token.name as string
+        session.user.email = token.email as string
+        session.user.image = token.picture as string
       }
+
       return session
     },
   },

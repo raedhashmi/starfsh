@@ -5,12 +5,14 @@ import {
   RiLightbulbLine,
   RiChat3Line,
   RiHistoryLine,
+  RiFolder3Fill,
   RiKey2Line,
   RiBarChartLine,
-  RiLogoutBoxLine,
   RiSettingsLine,
-  RiBankCardLine
+  RiBankCardLine,
+  RiDashboardFill,
 } from "@remixicon/react"
+import Link from "next/link"
 import { auth } from "@/auth"
 import Image from "next/image"
 import {
@@ -26,6 +28,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/dashboard/sidebar"
+import LogoutButton from "./logout-button"
 import { 
   DropdownMenu,
   DropdownMenuTrigger,
@@ -35,7 +38,6 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dashboard/dropdown-menu"
-import { signOut } from "next-auth/react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/dashboard/avatar"
 
 export default async function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -47,7 +49,7 @@ export default async function AppSidebar({ ...props }: React.ComponentProps<type
 
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader className="bg-primary-foreground/40 mb-4">
+      <SidebarHeader className="bg-primary-foreground/40 mb-4 rounded-lg">
         <div className="flex flex-row group-data-[state=collapsed]:px-0 px-4 group-data-[state=collapsed]:py-0 py-1 gap-2 items-center">
           <Image alt='logo' className="group-data-[state=collapsed]:size-8 ml-0.5 size-10" src={'/favicon.ico'} width={4} height={4}></Image>
             <div className="flex text-2xl space-x-px items-center group-data-[state=collapsed]:hidden">
@@ -73,13 +75,47 @@ export default async function AppSidebar({ ...props }: React.ComponentProps<type
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+
           <SidebarGroupContent>
+            <SidebarMenu>
+
               <SidebarMenuItem>
-                  <SidebarMenuButton><RiChat3Line /> New Thread</SidebarMenuButton>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard/">
+                    <RiDashboardFill />
+                    <span>Overview</span>
+                  </Link>
+                </SidebarMenuButton>
               </SidebarMenuItem>
+
               <SidebarMenuItem>
-                  <SidebarMenuButton><RiHistoryLine /> Recent Chats</SidebarMenuButton>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard/chat/">
+                    <RiChat3Line />
+                    <span>New Thread</span>
+                  </Link>
+                </SidebarMenuButton>
               </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard/chat/recents">
+                    <RiHistoryLine />
+                    <span>Recent Chats</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href="/dashboard/projects">
+                    <RiFolder3Fill />
+                    <span>Manage Projects</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+            </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
@@ -131,7 +167,7 @@ export default async function AppSidebar({ ...props }: React.ComponentProps<type
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={() => signOut()}><RiLogoutBoxLine/> Log Out</DropdownMenuItem>
+                   <LogoutButton />
                   </DropdownMenuGroup>
                 </DropdownMenuContent>
               </DropdownMenu>

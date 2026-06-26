@@ -26,7 +26,7 @@ export async function registerUser(data: { name: string, email: string, password
     await signIn("credentials", {
       useroremail: email,
       password: password,
-      redirectTo: "/dashboard",
+      redirectTo: `/dashboard`,
     })
 
     return { message: "Account successfully registered.", status: 200 }

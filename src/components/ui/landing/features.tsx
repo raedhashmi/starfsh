@@ -137,7 +137,7 @@ export default function Features() {
   ]
 
   return (
-    <section className="mt-32">
+    <section id="features" className="mt-32">
       <div className="flex flex-col items-center text-center">
         <span className="text-sm font-medium uppercase tracking-widest text-primary">Capabilities</span>
         <h2 className="mt-3 max-w-2xl text-balance text-3xl font-bold md:text-5xl">

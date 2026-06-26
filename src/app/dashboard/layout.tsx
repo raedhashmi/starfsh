@@ -1,7 +1,7 @@
 import "../globals.css";
-import type { Metadata } from "next";
 import AppSidebar from "@/components/ui/dashboard/dashboard-sidebar"
 import { SidebarProvider, SidebarInset } from "@/components/ui/dashboard/sidebar"
+import React from "react";
 
 export const metadata = {
   title: "starfsh - Dashboard",
@@ -17,19 +17,18 @@ export const metadata = {
   }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-      <SidebarProvider>
-          <AppSidebar />
+    <SidebarProvider>
+        <AppSidebar variant="inset"/>
 
-          <SidebarInset></SidebarInset>
-      </SidebarProvider>
-      {children}
-    </div>
+        <SidebarInset>
+          {children}
+        </SidebarInset>
+    </SidebarProvider>
   );
 }

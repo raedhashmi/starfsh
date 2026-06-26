@@ -76,9 +76,10 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
-  username: 'username',
+  name: 'name',
   email: 'email',
   password: 'password',
+  image: 'image',
   acceptsMarketing: 'acceptsMarketing',
   createdAt: 'createdAt'
 } as const
@@ -104,6 +105,7 @@ export const RepositoryScalarFieldEnum = {
   repositoryLink: 'repositoryLink',
   pagesIoLink: 'pagesIoLink',
   summaryText: 'summaryText',
+  status: 'status',
   dateIndexed: 'dateIndexed',
   createdAt: 'createdAt',
   userId: 'userId'
@@ -115,6 +117,7 @@ export type RepositoryScalarFieldEnum = (typeof RepositoryScalarFieldEnum)[keyof
 export const ChatScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  repositoryId: 'repositoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   userId: 'userId'
